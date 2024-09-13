@@ -1,0 +1,39 @@
+// Fadli Shidqi Firdaus
+// 21120122140166
+// SDL C
+
+module test_demux_gate;
+    reg A;
+    reg [1:0] S;
+    wire [3:0] Y_gate;
+
+    // Instantiate the design
+    demux_1to4 uut (
+        .A(A),
+        .S(S),
+        .Y_gate(Y_gate),
+        .Y_data(),    // Unused
+        .Y_beh()      // Unused
+    );
+
+    initial begin
+        // Print header
+        $display("Gate Level: A S1 S0 | Y3 Y2 Y1 Y0");
+        $display("-------------------------------");
+
+        // Apply test vectors
+        A = 1; S = 2'b00; #10;
+        $display("   %b   %b   %b  |  %b  %b  %b  %b", A, S[1], S[0], Y_gate[3], Y_gate[2], Y_gate[1], Y_gate[0]);
+        
+        A = 1; S = 2'b01; #10;
+        $display("   %b   %b   %b  |  %b  %b  %b  %b", A, S[1], S[0], Y_gate[3], Y_gate[2], Y_gate[1], Y_gate[0]);
+        
+        A = 1; S = 2'b10; #10;
+        $display("   %b   %b   %b  |  %b  %b  %b  %b", A, S[1], S[0], Y_gate[3], Y_gate[2], Y_gate[1], Y_gate[0]);
+
+        A = 1; S = 2'b11; #10;
+        $display("   %b   %b   %b  |  %b  %b  %b  %b", A, S[1], S[0], Y_gate[3], Y_gate[2], Y_gate[1], Y_gate[0]);
+        
+        $finish;
+    end
+endmodule

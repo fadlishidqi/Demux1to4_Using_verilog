@@ -1,0 +1,39 @@
+// Fadli Shidqi Firdaus
+// 21120122140166
+// SDL C
+
+module test_demux_dataflow;
+    reg A;
+    reg [1:0] S;
+    wire [3:0] Y_data;
+
+    // Instantiate the design
+    demux_1to4 uut (
+        .A(A),
+        .S(S),
+        .Y_gate(),    // Unused
+        .Y_data(Y_data),
+        .Y_beh()      // Unused
+    );
+
+    initial begin
+        // Print header
+        $display("Data Flow: A S1 S0 | Y3 Y2 Y1 Y0");
+        $display("-------------------------------");
+
+        // Apply test vectors
+        A = 1; S = 2'b00; #10;
+        $display("   %b   %b   %b  |  %b  %b  %b  %b", A, S[1], S[0], Y_data[3], Y_data[2], Y_data[1], Y_data[0]);
+        
+        A = 1; S = 2'b01; #10;
+        $display("   %b   %b   %b  |  %b  %b  %b  %b", A, S[1], S[0], Y_data[3], Y_data[2], Y_data[1], Y_data[0]);
+        
+        A = 1; S = 2'b10; #10;
+        $display("   %b   %b   %b  |  %b  %b  %b  %b", A, S[1], S[0], Y_data[3], Y_data[2], Y_data[1], Y_data[0]);
+
+        A = 1; S = 2'b11; #10;
+        $display("   %b   %b   %b  |  %b  %b  %b  %b", A, S[1], S[0], Y_data[3], Y_data[2], Y_data[1], Y_data[0]);
+
+        $finish;
+    end
+endmodule
